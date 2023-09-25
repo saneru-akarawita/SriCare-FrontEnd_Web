@@ -49,8 +49,8 @@ const PCardHeader = styled.div`
   background-color: #053B50;
   color: white;
   padding: 10px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 `;
 
 const PCardFooter = styled(CardActions)`
@@ -64,7 +64,7 @@ const PCardStatus = styled.div`
   background-color: ${(props) => props.statusColor};
   color: white;
   padding: 2px 6px;
-  border-bottom-left-radius: 8px;
+  border-bottom-left-radius: 0px;
   border-top-right-radius: 8px;
 `;
 
