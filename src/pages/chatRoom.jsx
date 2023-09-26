@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import * as SockJS from 'sockjs-client';
 import {Stomp} from '@stomp/stompjs';
+import '../assets/chat.css';
+import TopBar from '../components/TopBar';
 
 var stompClient =null;
 const ChatRoom = () => {
@@ -118,6 +120,7 @@ const ChatRoom = () => {
     }
     return (
     <div className="container">
+        <TopBar />
         {userData.connected?
         <div className="chat-box">
             <div className="member-list">
@@ -162,6 +165,7 @@ const ChatRoom = () => {
             </div>}
         </div>
         :
+        <div><h1 style={{color:"white", fontFamily: "sans-serif", marginTop: 200, textAlign: "center"}}> Welcome to SriCare Chat</h1>
         <div className="register">
             <input
                 id="user-name"
@@ -174,7 +178,7 @@ const ChatRoom = () => {
               <button type="button" onClick={registerUser}>
                     connect
               </button> 
-        </div>}
+        </div></div>}
     </div>
     )
 }
