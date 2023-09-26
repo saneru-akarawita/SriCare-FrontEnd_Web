@@ -11,6 +11,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import ChatIcon from '@mui/icons-material/Chat';
+
 
 const pages = ['Home', 'Packages and Plans', 'Bills'];
 const settings = ['Profile', 'Logout'];
@@ -132,6 +134,15 @@ function ResponsiveAppBar() {
                     </Box>
                     {/* LAPTOP VIEW HEADING ENDS */}
 
+                    <IconButton
+                        size="large"
+                        aria-label="chat"
+                        color="inherit"
+                        sx={{ ml: 'auto', marginRight: 5}} // This pushes the icon to the right
+                    >
+                        <ChatIcon />
+                    </IconButton>
+
                     {/* user icon section */}
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
@@ -163,7 +174,7 @@ function ResponsiveAppBar() {
                         </Menu>
                     </Box>
                     {/* user icon section ends */}
-
+                    
                 </Toolbar>
             </Container>
         </AppBar>
