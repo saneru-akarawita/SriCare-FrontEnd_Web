@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../pages/samplePage';
-import MainBill from '../pages/mainBillPage'
+import MainBill from '../pages/mainBillPage';
+import ChatRoom from '../pages/chatRoom';
 
 
 export const mainRouter = createBrowserRouter([
@@ -13,6 +14,11 @@ export const mainRouter = createBrowserRouter([
   {
     path: '/allbills',
     element: <MainBill />
+  },
+
+  {
+    path: '/chat',
+    element: <ChatRoom />
   }
 ]);
 
