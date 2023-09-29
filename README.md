@@ -11,8 +11,8 @@ Currently, two official plugins are available:
 
 ## initializing node_modules
 
-    `yarn`
+    yarn
 
 ## run application
 
-    `yarn dev`
+    yarn dev
