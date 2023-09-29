@@ -40,7 +40,7 @@ import {
                 <Typography variant="h6" style={expertiseStyle}>
                  Let callers hear your favourite tune
                 </Typography>
-                <Typography style={needsStyle}>for just Rs.30/month</Typography>
+                <Typography style={needsStyle}>for just Rs.40/month</Typography>
               </Grid>
               <Grid item>
               <img
