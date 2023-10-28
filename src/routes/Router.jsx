@@ -4,6 +4,8 @@ import App from '../pages/samplePage';
 import MainBill from '../pages/mainBillPage';
 import ChatRoom from '../pages/chatRoom';
 import Vas from '../pages/valueAddedServices';
+import LoginPage from '../pages/loginPage';
+import RegisterPage from '../pages/registerPage';
 
 
 export const mainRouter = createBrowserRouter([
@@ -23,6 +25,14 @@ export const mainRouter = createBrowserRouter([
   {
     path: '/chat',
     element: <ChatRoom />
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
+  },
+  {
+    path: '/register',
+    element: <RegisterPage />,
   }
 ]);
 
