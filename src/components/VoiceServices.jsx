@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, CardActions } from '@mui/material';
 import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import styled from 'styled-components';
-
-
-
+import axios from 'axios';
+import VoiceService from '../components/VoiceServices';
 const billsData = [
   {
     id: 1,
@@ -97,13 +96,37 @@ const PCardContainer = styled.div`
   justify-content: space-between;
 `;
 
+
 const VoiceService = () => {
+  const [packages,setPackages]=useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/v1/package/all/POSTPAIDVOICE')
+      .then(function (response) {
+        setPackages(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []); 
+  const userId=1;
+
+  const ActivatePackage = (id) => {
+    axios.post(`http://localhost:8080/api/v1/package/activate/${userId}/${id}`)
+        .then((response) => {
+            if(response.status === 200) {
+                alert("Successfully Activated");
+            }
+        }).catch((error) => {
+          alert("Failed to activate");
+        });
+  };
  
   return (
 
 
     <PCardContainer>
-      {billsData.map((bill) => (
+      {packages.map((bill) => (
         <PCardWrapper key={bill.id}>
                             
                             <Box
@@ -132,19 +155,19 @@ const VoiceService = () => {
                                     </Typography>
                                 </Box>
 
-                                <Typography variant="body1" color="text.secondary" sx={{mb:2}}>
+                                {/* <Typography variant="body1" color="text.secondary" sx={{mb:2}}>
                                     {bill.voice}
-                                </Typography>
+                                </Typography> */}
 
-                                <Typography variant="body1" color="text.primary" sx={{ textAlign: 'left',ml:6}}>
+                                {/* <Typography variant="body1" color="text.primary" sx={{ textAlign: 'left',ml:6}}>
                                     {bill.discription}
                                 </Typography>   
                                 
                                 <Typography variant="body1" color="text.primary" sx={{ textAlign: 'left',ml:6}}>
                                     {bill.discription2}
-                                </Typography>
+                                </Typography> */}
 
-                                <Button variant="contained" sx={{ width: 200, height: 48, mx: 'auto',my:5 }} >
+                                <Button variant="contained" sx={{ width: 200, height: 48, mx: 'auto',my:5 }}  onClick={() => ActivatePackage(bill.id)}>
                                     Get Package
                                 </Button>
                     

@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import TopBar from '../components/TopBar';
 import { Paper, Card, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import PastBills from '../components/pastbills';
-import VoiceService from '../components/VoiceServices';
+
 import DataServices from '../components/DataServices';
 
 function MainBillViewer() {
     const [activeTab, setActiveTab] = useState('current'); // 'current' or 'past'
+    
 
     const handleTabChange = (tab) => {
       setActiveTab(tab);
     };
+
+    
 
   return (
 //hi saneru

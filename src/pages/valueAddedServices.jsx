@@ -7,29 +7,54 @@ import {
     CardContent,
     Button,
   } from '@mui/material';
-
-
+  import React, {useEffect, useState } from 'react';
+  import axios from 'axios';
   const Vas= () => {
-    const cards = [
-      {
-        title: 'Ringing tone 1',
-      },
-      {
-        title: 'Ringing tone 2',
-      },
-      {
-        title: 'Ringing tone 3',
-      },
-      {
-        title: 'Ringing tone 4',
-      },
-      {
-        title: 'Ringing tone 5',
-      },
-      {
-        title: 'Ringing tone 6',
-      },
-    ];
+
+    // const cards = [
+    //   {
+    //     title: 'Ringing tone 1',
+    //   },
+    //   {
+    //     title: 'Ringing tone 2',
+    //   },
+    //   {
+    //     title: 'Ringing tone 3',
+    //   },
+    //   {
+    //     title: 'Ringing tone 4',
+    //   },
+    //   {
+    //     title: 'Ringing tone 5',
+    //   },
+    //   {
+    //     title: 'Ringing tone 6',
+    //   },
+    // ];
+
+    const [ringtones,setRingtones]=useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/v1/ringing-tones/all')
+      .then(function (response) {
+        setRingtones(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []); 
+  const userId=1;
+
+  const ActivateRingTone = (id) => {
+    axios.post(`http://localhost:8080/api/v1/ringing-tones/activate/${userId}/${id}`)
+        .then((response) => {
+            if(response.status === 200) {
+                alert("Successfully Activated");
+            }
+        }).catch((error) => {
+          alert("Failed to activate");
+        });
+  };
     return (
       <>
 
@@ -53,18 +78,19 @@ import {
         </Box>
         <Container style={{ maxWidth: '1800px',backgroundColor:'#646cff' }}>
           <Grid container spacing={7}>
-            {cards.map((card, index) => (
+            {ringtones.map((card, index) => (
               <Grid item xs={12} md={6} key={index}>
                 <Card style={cardStyle}>
                   <CardContent style={cardContentStyle}>
                     <Typography variant="h6" style={titleStyle}>
-                      {card.title}
+                      {card.name}
                     </Typography>
                     <Box style={buttonContainerStyle}>
                       <Button
                         variant="contained"
                         color="primary"
                         style={acceptButtonStyle}
+                        onClick={() => ActivateRingTone(bill.id)}
                       >
                         Activate Ringing tone
                       </Button>

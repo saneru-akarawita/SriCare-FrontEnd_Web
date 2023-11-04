@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, CardActions } from '@mui/material';
 import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const billsData = [
   {
@@ -99,6 +100,29 @@ const PCardContainer = styled.div`
 `;
 
 const DataServices = () => {
+  const [packages,setPackages]=useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/v1/package/all/PREPAIDDATA')
+      .then(function (response) {
+        setPackages(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []); 
+  const userId=1;
+
+  const ActivatePackage = (id) => {
+    axios.post(`http://localhost:8080/api/v1/package/activate/${userId}/${id}`)
+        .then((response) => {
+            if(response.status === 200) {
+                alert("Successfully Activated");
+            }
+        }).catch((error) => {
+          alert("Failed to activate");
+        });
+  };
   const [currentBillIndex, setCurrentBillIndex] = useState(0);
 
   const currentBill = billsData[currentBillIndex];
@@ -124,7 +148,7 @@ const DataServices = () => {
 
 
     <PCardContainer>
-      {billsData.map((bill) => (
+      {packages.map((bill) => (
         <PCardWrapper key={bill.id}>
                             
                             <Box
@@ -147,7 +171,7 @@ const DataServices = () => {
                                 </Box>
 
 
-                                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mt:2 }}>
+                                {/* <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mt:2 }}>
                                     <Typography variant="h3" component="span" sx={{ mr: 2, fontWeight: 'extrabold', color: '#053b50'}}>
                                     {bill.permin}GB
                                     </Typography>
@@ -163,9 +187,9 @@ const DataServices = () => {
                                 
                                 <Typography variant="body1" color="text.primary" sx={{ textAlign: 'left',ml:6}}>
                                     {bill.discription2}
-                                </Typography>
+                                </Typography> */}
 
-                                <Button variant="contained" sx={{ width: 200, height: 48, mx: 'auto',my:5 }}>
+                                <Button variant="contained" sx={{ width: 200, height: 48, mx: 'auto',my:5 }}  onClick={() => ActivatePackage(bill.id)}>
                                     Get Package
                                 </Button>
                             </Box>
