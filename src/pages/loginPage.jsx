@@ -1,4 +1,5 @@
-import React from "react";
+import {useState} from "react";
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import FormControl from '@mui/material/FormControl';
@@ -21,6 +22,34 @@ const theme = createTheme({
 })
 
 function LoginPage() {
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+const loginUser = (e) => {
+    e.preventDefault();
+    // console.log(formData);
+
+    axios.post('http://localhost:8080/api/v1/auth/authenticate', formData
+    ).then((response) => {
+        if(response.status === 200){
+            console.log(response.data);
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            window.location.href = "/valueAddedServices";
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
   return (
     <div>
         <Container 
@@ -63,46 +92,56 @@ function LoginPage() {
                     Please Login
                 </Box>
 
-                <FormControl 
-                    sx={{ 
-                        width: '100%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        marginTop: '10%',
-                        marginBottom: '5%',
-                     }}
-                >
-                    <ThemeProvider theme={theme}>
-                        <TextField id="outlined-basic" label="Email" variant="outlined" 
-                            sx={{ 
+                <form action="" onSubmit={loginUser}>
+                    <FormControl
+                        sx={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            marginTop: '10%',
+                            marginBottom: '5%',
+                         }}
+                    >
+                        <ThemeProvider theme={theme}>
+                            <TextField id="outlined-basic" label="Email" variant="outlined"
+                                sx={{
+                                    width: '80%',
+                                    marginX: 'auto',
+                                    marginY: '2%',
+                                }}
+                                       name="email"
+                                       value={formData.email}
+                                       onChange={handleChange}
+                            />
+                        </ThemeProvider>
+
+                        <ThemeProvider theme={theme}>
+                            <TextField id="outlined-basic" label="Password" variant="outlined"
+                                sx={{
+                                    width: '80%',
+                                    marginX: 'auto',
+                                    marginY: '2%',
+                                }}
+                                       name="password"
+                                       value={formData.password}
+                                       onChange={handleChange}
+                            />
+                        </ThemeProvider>
+
+                        <Button variant="contained"
+
+                            sx={{
                                 width: '80%',
                                 marginX: 'auto',
-                                marginY: '2%',
+                                marginTop: '5%',
+                                backgroundColor: '#64CCC5'
                             }}
-                        />
-                    </ThemeProvider>
 
-                    <ThemeProvider theme={theme}>
-                        <TextField id="outlined-basic" label="Password" variant="outlined" 
-                            sx={{ 
-                                width: '80%',
-                                marginX: 'auto',
-                                marginY: '2%',
-                            }}
-                        />
-                    </ThemeProvider>
+                                type="submit"
 
-                    <Button variant="contained"
-                
-                        sx={{ 
-                            width: '80%',
-                            marginX: 'auto',
-                            marginTop: '5%',
-                            backgroundColor: '#64CCC5'
-                        }}
-                            
-                    >Login</Button>
-                </FormControl>
+                        >Login</Button>
+                    </FormControl>
+                </form>
 
                 <Box
                     sx={{

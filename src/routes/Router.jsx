@@ -11,6 +11,7 @@ import Done from '../pages/Done';
 
 import LoginPage from '../pages/loginPage';
 import RegisterPage from '../pages/registerPage';
+import Profile from "../pages/profile.jsx";
 
 
 
@@ -54,6 +55,10 @@ export const mainRouter = createBrowserRouter([
   {
     path: '/register',
     element: <RegisterPage />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />,
   }
 
 ]);
