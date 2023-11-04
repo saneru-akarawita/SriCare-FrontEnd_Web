@@ -39,7 +39,12 @@ const loginUser = (e) => {
 
     axios.post('http://localhost:8080/api/v1/auth/authenticate', formData
     ).then((response) => {
-        console.log(response);
+        if(response.status === 200){
+            console.log(response.data);
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            window.location.href = "/valueAddedServices";
+        }
     }).catch((error) => {
         console.log(error);
     });

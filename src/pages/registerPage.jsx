@@ -47,6 +47,7 @@ function RegisterPage() {
             if(response.status === 200) {
                 if(response.data.errors === null){
                     toast.success('Registration Successful');
+                    localStorage.setItem('token', response.data.token);
                     setTimeout(() => {
                         window.location.href = '/login';
                     }, 2000);
