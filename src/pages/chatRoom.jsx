@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as SockJS from 'sockjs-client';
 import {Stomp} from '@stomp/stompjs';
 import '../assets/chat.css';
@@ -55,7 +55,7 @@ const ChatRoom = () => {
                 break;
         }
     }
-    
+
     const onPrivateMessage = (payload)=>{
         console.log(payload);
         var payloadData = JSON.parse(payload.body);
@@ -173,7 +173,7 @@ const ChatRoom = () => {
                 name="userName"
                 value={userData.username}
                 onChange={handleUsername}
-                margin="normal"
+                // margin="normal"
               />
               <button type="button" onClick={registerUser}>
                     connect

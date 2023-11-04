@@ -4,9 +4,14 @@ import App from '../pages/samplePage';
 import MainBill from '../pages/mainBillPage';
 import ChatRoom from '../pages/chatRoom';
 import Vas from '../pages/valueAddedServices';
+
 import Service from '../pages/Services';
 import Amount from '../pages/Amount';
 import Done from '../pages/Done';
+
+import LoginPage from '../pages/loginPage';
+import RegisterPage from '../pages/registerPage';
+
 
 
 export const mainRouter = createBrowserRouter([
@@ -28,6 +33,7 @@ export const mainRouter = createBrowserRouter([
     element: <ChatRoom />
   },
   {
+
     path: '/service',
     element: <Service />
   } 
@@ -40,6 +46,15 @@ export const mainRouter = createBrowserRouter([
     element: <Done />
   },
 
+
+{
+    path: '/login',
+    element: <LoginPage />,
+  },
+  {
+    path: '/register',
+    element: <RegisterPage />,
+  }
 
 ]);
 
