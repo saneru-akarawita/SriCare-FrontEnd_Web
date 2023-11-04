@@ -149,6 +149,7 @@ function Profile() {
                                                    name="currentPassword"
                                                    value={formData.currentPassword}
                                                    onChange={handleChange}
+                                                   type="password"
                                         />
                                         <TextField id="outlined-basic" label="New Password" variant="outlined"
                                                    sx={{
@@ -159,6 +160,7 @@ function Profile() {
                                                    name="newPassword"
                                                    value={formData.newPassword}
                                                    onChange={handleChange}
+                                                   type={"password"}
                                         />
                                         <TextField id="outlined-basic" label="Confirm New Password" variant="outlined"
                                                    sx={{
@@ -169,6 +171,7 @@ function Profile() {
                                                    name="confirmNewPassword"
                                                    value={formData.confirmNewPassword}
                                                    onChange={handleChange}
+                                                    type={"password"}
                                         />
 
 
